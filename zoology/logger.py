@@ -13,7 +13,9 @@ class WandbLogger:
             self.no_logger = True
             return
         self.no_logger = False
+        wandb.login(key=config.logger.key)
         self.run = wandb.init(
+            group=config.sweep_id,
             name=config.run_id,
             entity=config.logger.entity,
             project=config.logger.project_name, 
