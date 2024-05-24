@@ -1,23 +1,31 @@
+<h2 style="text-align: center;">Understanding the differences in Foundation Models:<br> Attention, State Space Models, and Recurrent Neural Networks</h2>
+
+This repository contains the code of the paper titled "Understanding the differences in Foundation Models: Attention, State Space Models, and Recurrent Neural Networks".
+
+This code is a derivative of the [Zoology code base](https://github.com/HazyResearch/zoology).
+
+### Getting started
+1. Install Zoology using the install instructions in the original README copied below.
+1. Install the selective scan CUDA implementation from `mamba-ssm`, see [here](https://github.com/state-spaces/mamba). This is needed for running S6 and SSD efficiently.
+1. Install `accelerated-scan` from [here](https://github.com/proger/accelerated-scan). This is needed for running the qLSTMs efficiently.
+
+### Reproducing paper experiments
+The configs, instructions and plotting code for reproducing the figures in these papers are provided in the following sub-folders. 
+
+- configs
+    - `zoology/experiments/dsf-arxiv/`
+- plotting
+    - `../notebooks/plotting.ipynb`
+
+-----
+
 <div align="center" >
     <img src="assets/banner.png" height=150 alt="Meerkat logo" style="margin-bottom:px"/> 
-
-[![GitHub](https://img.shields.io/github/license/HazyResearch/meerkat)](https://img.shields.io/github/license/HazyResearch/meerkat)
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
 **Understand and test language model architectures on synthetic tasks.**
 
 
 </div>
-
-Zoology provides machine learning researchers with a simple playground for understanding and testing language model architectures on synthetic tasks. This repository can be used to reproduce the results in our paper *[Zoology: Measuring and Improving Recall in Efficient Language Models](https://arxiv.org/abs/2312.04927)*. See the section on [reproducing paper experiments](#reproducing-paper-experiments) for details.
-
----
-
-*Why did we make Zoology?* In our research on efficient language models, synthetic tasks have been crucial for understanding and debugging issues before scaling up to expensive pretraining runs. So, we're releasing the code we've used alongside instructions for replicating a lot of our experiments and their WandB logs.  Simplicity is our main design goal: limited dependencies, architecture implementations that are easy to understand, and a straightforward process for adding new synthetic tasks. 
-
-*Is Zoology a good fit for your use case?* If you are looking to actually train a large machine learning model, Zoology's training harness (which is optimized for simplicity) is certainly not a good fit. For our language model research, we've found the [GPT-NeoX](https://github.com/EleutherAI/gpt-neox) useful for this. That being said, you might still want to use some of Zoology's layer implementations or maybe even mix the synthetic tasks into your training distribution. 
-
-*I want to explore the Based architecture. How should I get started?* See our repository at [HazyResearch/based](https://github.com/HazyResearch/based) for the code we used to train and evaluate large Based language models. If you would like to reproduce the synthetic experiments from the Based paper, this is the right repository! See [zoology/experiments/arxiv24_based_figure2/README.md]() for instructions on how to reproduce the results. 
 
 
 ## Getting started
@@ -41,16 +49,6 @@ python -m zoology.launch zoology/experiments/examples/basic_sweep.py
 ```
 If you have access to multiple GPUs, you can run the sweep in parallel by adding the `-p` flag.
 
-
-## Reproducing paper experiments
-This repository has been used to produce results in a few papers on efficient language models. 
-The configs, instructions and plotting code for reproducing the figures in these papers are provided in the following sub-folders. 
-
-- [Zoology: Measuring and improving recall in efficient language models](https://arxiv.org/abs/2312.04927)
-    - zoology/experiments/iclr24_zoology_figure2
-- [Based: Simple linear attention balances the recall-throughput tradeoff]()
-    - zoology/experiments/arxiv24_based_figure2
-    - zoology/experiments/arxiv24_based_figure3
 
 ## Configuration, Experiments, and Sweeps
 In this section, we'll walk through how to configure an experiment and launch sweeps. 
@@ -164,22 +162,4 @@ config = TrainConfig(
 
 
 **Caching dataset creation.** Sometimes it's useful to cache the dataset creation process, especially if it's expensive. To do so you can pass a `cache_dir` to the `DataConfig`: `DataConfig(..., cache_dir="my_cache_dir")`.
-
-
-
-## About 
-
-This repo is being developed by members of the HazyResearch group. 
-
-If you use this codebase, or otherwise found our work valuable, please cite:
-```
-@article{zoology2023,
-  title={Zoology: Measuring and Improving Recall in Efficient Language Models},
-  author={Arora, Simran and Eyuboglu, Sabri and Timalsina, Aman and Johnson, Isys and Poli, Michael and Zou, James and Rudra, Atri and Ré, Christopher},
-  journal={	arXiv:2312.04927},
-  year={2023}
-}
-```
-
-
 
