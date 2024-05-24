@@ -82,7 +82,7 @@ class DataConfig(BaseConfig):
     # can pass a tuple if you want a different batch size for train and test
     batch_size: Union[int, Tuple[int, int]] = 32
 
-    seed: int = 123
+    seed: int = 0
 
     cache_dir: str = None
     force_cache: bool = False 
@@ -95,6 +95,7 @@ class ModelConfig(BaseConfig):
     )
 
     d_model: int = 128
+    d_qk: int = 16
     n_layers: int = 2
     max_position_embeddings: int = 64
     learnable_word_embeddings: bool = True
@@ -111,6 +112,7 @@ class ModelConfig(BaseConfig):
 
 class LoggerConfig(BaseConfig):
 
+    key: str = None
     project_name: str = None
     entity: str = None
     
